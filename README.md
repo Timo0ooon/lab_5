@@ -64,10 +64,10 @@ public class Car {<br/>
 }<br/>
 
 public enum WeaponType {<br/>
-<tr>HAMMER,<br/>
-<tr>AXE,<br/>
-<tr>PISTOL,<br/>
-<tr>MACHINE_GUN;<br/>
+<tr>HAMMER,<br/></tr>
+<tr>AXE,<br/></tr>
+<tr>PISTOL,<br/></tr>
+<tr>MACHINE_GUN;<br/></tr>
 }<br/>
 
 public enum Mood {<br/>
