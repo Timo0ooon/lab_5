@@ -41,37 +41,37 @@ max_by_impact_speed : вывести любой объект из коллекц
 Поля с комментарием "Значение этого поля должно генерироваться автоматически" не должны вводиться пользователем вручную при добавлении.
 Описание хранимых в коллекции классов:
 
-public class HumanBeing {
-    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private Boolean realHero; //Поле не может быть null
-    private Boolean hasToothpick; //Поле не может быть null
-    private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null
-    private WeaponType weaponType; //Поле не может быть null
-    private Mood mood; //Поле не может быть null
-    private Car car; //Поле не может быть null
-}
-public class Coordinates {
-    private Long x; //Поле не может быть null
-    private long y; //Значение поля должно быть больше -507
-}
-public class Car {
-    private String name; //Поле не может быть null
-}
-public enum WeaponType {
-    HAMMER,
-    AXE,
-    PISTOL,
-    MACHINE_GUN;
-}
-public enum Mood {
-    SORROW,
-    LONGING,
-    CALM,
-    FRENZY;
-}
+public class HumanBeing {<br/>
+    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически<br/>
+    private String name; //Поле не может быть null, Строка не может быть пустой<br/>
+    private Coordinates coordinates; //Поле не может быть null<br/>
+    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически<br/>
+    private Boolean realHero; //Поле не может быть null<br/>
+    private Boolean hasToothpick; //Поле не может быть null<br/>
+    private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null<br/>
+    private WeaponType weaponType; //Поле не может быть null<br/>
+    private Mood mood; //Поле не может быть null<br/>
+    private Car car; //Поле не может быть null<br/>
+}<br/>
+public class Coordinates {<br/>
+    private Long x; //Поле не может быть null<br/>
+    private long y; //Значение поля должно быть больше -507<br/>
+}<br/>
+public class Car {<br/>
+    private String name; //Поле не может быть null<br/>
+}<br/>
+public enum WeaponType {<br/>
+    HAMMER,<br/>
+    AXE,<br/>
+    PISTOL,<br/>
+    MACHINE_GUN;<br/>
+}<br/>
+public enum Mood {<br/>
+    SORROW,<br/>
+    LONGING,<br/>
+    CALM,<br/>
+    FRENZY;<br/>
+}<br/>
 Отчёт по работе должен содержать:
 
 Текст задания.
