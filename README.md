@@ -91,3 +91,297 @@ public enum Mood {
 * Работа с файлами в Java. Класс java.io.File.<br/>
 * Пакет java.nio - назначение, основные классы и интерфейсы.<br/>
 * Утилита javadoc. Особенности автоматического документирования кода в Java.<br/>
+
+# Теория:
+
+### 1. Коллекции. Сортировка элементов коллекции. Интерфейсы java.util.Comparable и java.util.Comparator.
+Коллекции — общее название для нескольких структур данных в Java. Данные можно хранить многими разными способами.<br/>
+
+Несколько методов интерфейса Collection:
+* boolean add(E e);  // Результат - элемент есть в коллекции. true - коллекция изменилась
+* boolean remove (Object o);  // результат - элемента нет в коллекции. true - коллекция изменилась 
+* boolean contains (Object o);  // true - элемент есть, коллекции нет.
+* int size();  // Количество элементов в коллекции.
+
+#### Иеархия коллекций в Java.
+![Иеархия коллекций](https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_6516c28dbfb075386a6d92a8_6516c44e0fa30450b9854f64/scale_1200)
+
+#### Сортировка элементов коллекции.
+* Если нужно отсортировать коллекцию, то нужно применить метод Collections.sort()<br/>
+* Если нужно отсортировать массив, то нужно применить метод Arrays.sort()<br/>
+
+#### Интерфейсы java.util.Comparable и java.util.Comparator.
+Comparable — это интерфейс, входящий в пакет java.lang и используемый для сортировки классов на основе их естественного порядка. Интерфейс Comparable должен быть реализован в классе, который будет использоваться для сортировки. Этот класс можно сортировать на основе отдельных атрибутов, таких как идентификатор, имя, отдел и так далее.<br/>
+<br/>
+Класс, реализующий интерфейс Comparable, сравнивает себя с другими объектами. Реализованный класс предлагает пользовательскую реализацию int CompareTo(T var1) для пользовательской сортировки.<br/>
+<br/>
+Метод int CompareTo(T var1) должен быть переопределен таким образом, чтобы:<br/>
+1. Он должен возвращать целое положительное значение Positive(>0), если этот объект больше объекта сравнения.<br/>
+2. Он должен возвращать целое отрицательное значение Negative(<0), если этот объект меньше объекта сравнения.<br/>
+3. Он должен вернуть Zero(=0), если этот и сравниваемый объект равны.<br/>
+
+При использовании класса Comparable можно сортировать только по одному атрибуту. Вот пример применения Comparable: <br/>
+
+```java
+class Employee implements Comparable<Employee>{
+    public final Integer id;
+    public final String name;
+    public final String surname;
+    public int salary;
+
+    public Employee(int id, String name, String surname, int salary) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.salary = salary;
+    }
+
+    public void set_new_salary(int salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee: " + name + " " + surname + " " + id + " " + salary;
+    }
+
+    // 1 способ реализации
+    @Override
+    public int compareTo(Employee anotheremployee) {
+        if (this.id > anotheremployee.id)
+            return 1;
+        else if (this.id < anotheremployee.id)
+            return -1;
+        return 0;
+    }
+    
+
+    // 2 способ реализации
+    /*
+    @Override
+    public int compareTo(Employee anotheremployee) {
+        return this.id - anotheremployee.id;
+    }
+    */
+
+    // 3 способ способ реализации
+    // Integer имплементирует Comparable
+    // String имплементирует Comparable
+    /*
+    @Override
+    public int compareTo(Employee anotheremployee) {
+        return this.id.compareTo(anotheremployee.id);
+    }
+    */
+
+    // 4 способ по сортировке имени, но если имена совпадают, то по фамилиям. Лучше использовать интерфейс Comparator.
+    /*
+    @Override
+    public int compareTo(Employee anotheremployee) {
+        int res = this.name.compareTo(anotheremployee.name);
+        if (res == 0)
+            return this.surname.compareTo(anotheremployee.surname);
+
+        return res;
+    */
+    }
+
+    @Override
+    public String toString() {
+        return "Employee: " + name + " " + surname + " " + id + " " + salary;
+    }
+}
+```
+
+Comparator — это интерфейс, входящий в пакет java.util, который также используется для сортировки коллекций в Java. В отличие от Comparable, интерфейс Comparator не обязательно должен быть реализован в исходном классе, его можно реализовать и в отдельном классе.<br/>
+
+Используя Comparator, мы можем сортировать список на основе различных атрибутов в соответствии с нашими требованиями. В компараторе два объекта передаются в метод сравнения и сравниваются друг с другом. Метод int Compare(T var1, T var2) должен быть реализован пользовательским классом компаратора.<br/>
+
+Метод int Compare(T var1, T var2) должен быть переопределен таким образом, чтобы:<br/>
+1. Он должен возвращать целое число положительное значение Positive(+ve), если первый объект больше второго объекта.<br/>
+2. Он должен возвращать целое отрицательное значение Negative(-ve), если первый объект меньше второго объекта.<br/>
+3. Он должен возвращать Zero(0), если оба объекта равны.<br/>
+
+Пример использования Comparator:<br/>
+
+```java
+class IdComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.id.compareTo(emp2.id);
+    }
+}
+
+class NameComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.name.compareTo(emp2.name);
+    }
+}
+
+class SalaryComparator implements Comparator<Employee> {
+
+    @Override
+    public int compare(Employee emp1, Employee emp2) {
+        return emp1.salary - emp2.salary;
+    }
+}
+```
+
+Пример использования сортировки по умолчанию и своей сортировки: 
+
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+         Employee employee_3 = new Employee(3, "Dimas3", "Solovev", 100000);
+         Employee employee_1 = new Employee(1, "Dimas1", "Solovev", 300000);
+         Employee employee_2 = new Employee(2, "Dimas2", "Solovev", 500000);
+
+         List<Employee> list = Arrays.asList(employee_3, employee_1, employee_2);
+
+         Collections.sort(list);  // Comparable
+         System.out.println(list);  // Output: [Employee: Dimas1 Solovev 1 100000, Employee: Dimas2 Solovev 2 200000, Employee: Dimas3 Solovev 3 300000]
+
+         Collections.sort(list, new SalaryComparator());  // Comparator 
+         System.out.println(list);  // Output: [Employee: Dimas3 Solovev 3 100000, Employee: Dimas2 Solovev 2 300000, Employee: Dimas1 Solovev 1 500000]
+    }
+}
+```
+
+### 2. Категории коллекций - списки, множества. Интерфейс java.util.Map и его реализации.<br/>
+
+#### Интерфейс List<E> - индексированный список
+* Индекс от 0 до N
+* E get(int index);
+* E set(int index, E e);
+* void add(int index, E e);
+* E remove(int index);
+
+#### Динамический массив ArrayList 
+1. Реализация списка (list) на основе массива (array).
+2. ArrayList extends AbstractList implements List, RandomAccess.
+3. Быстрый произвольный доступ по индексу - O(1).
+
+#### Двусвязный список LinkedList
+1. Реализация на основе двусвязного списка.
+2. LinkedList extends AbstractSequentialList implements List.
+3. Последовательный доступ к элементам - O(n).
+4. Быстрое добавление и удаление - O(1).
+
+#### Еще списки
+1. Vector - потокобезопасный, но устаревший ArrayList.
+2. Stack - устаревшая реализация на базе вектора.
+3. CopyOnWriteArrayList - новая копия при каждом изменении.
+
+<br/>
+<br/>
+<br/>
+
+#### Интерфейс Set<E> - множество уникальных значений
+* Методы как у Collection.
+* Массовые операции - объединение, пересечение, разность множеств.
+* Реализации - как у Map
+
+<br/>
+<br/>
+<br/>
+
+#### Интерфейс Map<K, V> - отображение пары "ключ-значение"
+* Ассоциативный массив, отображение, словарь.
+* Два параметра типа.
+* Ключи уникальные, значения - любые.
+* Методы: V put(K key, V value), V get(K key), V remove(K key)...
+
+#### Хеш-таблица HashMap
+* Ассоциативный массив на основе хеш-таблицы
+* bucket = key.hashcode() % N
+* Нужен метод hashCode() у элементов
+* Обход элементов - в полном беспорядке
+
+#### SequencedMap + LinkedHashMap
+* Упорядоченность
+* HashMap + связный список
+* Получение элементов в порядке добавления
+
+### 3. Параметризованные типы. Создание параметризуемых классов. Wildcard-параметры.
+Дженерики (обобщения) — это особые средства языка Java для реализации обобщённого программирования: особого подхода к описанию данных и алгоритмов, позволяющего работать с различными типами данных без изменения их описания.
+
+#### Примеры использования параметризуемых классов:
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Test<Integer> values = new Test<>();
+        for (int i = 0; i < 10; i++) {
+            values.add(i);  // Output: 0 1 2 3 4 5 6 7 8 9
+        }
+        values.get_values();
+
+        System.out.println();
+        Test<Double> values_1 = new Test<>();
+        for (double i = 0.2d; i < 10d; i++) {
+            values_1.add(i);  // Output: 0.2 1.2 2.2 3.2 4.2 5.2 6.2 7.2 8.2 9.2 
+        }
+        values_1.get_values();
+    }
+}
+
+
+class Test<T extends Number> { // ограничение типов.
+    private final List<T> values = new ArrayList<>();
+
+    public void add(T value) {
+        values.add(value);
+    }
+
+    public void get_values() {
+        for(T value: values) {
+            System.out.print(value + " ");
+        }
+    }
+}
+```
+
+#### Примеры использования параметризации методов:
+``` java
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> data = new ArrayList<>();
+
+        int length = 100;
+        for (int i = 0; i < length; i += 10 ) {
+            data.add(i);
+        }
+        Integer value = GenMethod.getSecondElement(data);
+        System.out.println(value);  // Output: 10
+    }
+
+}
+
+class GenMethod {
+    public static <T extends Number> T getSecondElement(ArrayList<T> values) {  // Generics в методе
+        return values.get(1);
+    }
+}
+
+```
+
+#### Wildcard - параметры
+
+Wildcard (дословно "джокер", "подстановочный знак") - это механизм в языке программирования Java, который позволяет создавать гибкие и универсальные типы данных. Wildcard параметры используются в обобщенных типах (generics) для обеспечения более широкой гибкости при работе с коллекциями и другими структурами данных.
+
+В Java wildcard параметры обозначаются символом вопросительного знака ?. Существует несколько видов wildcard параметров:
+
+1. ? - неограниченный wildcard: представляет любой тип данных.
+2. ? extends T - ограниченный wildcard с верхней границей: представляет любой тип данных, который является подтипом класса T или самим классом T.
+3. ? super T - ограниченный wildcard с нижней границей: представляет любой тип данных, который является супертипом класса T или самим классом T.
+
+Wildcards позволяют создавать более гибкие и безопасные обобщенные типы, которые могут работать с различными типами данных. Они часто используются в методах, которые требуют передачи коллекций с неизвестными типами, или при работе с коллекциями, содержащими элементы различных типов.
