@@ -40,45 +40,39 @@ max_by_impact_speed : вывести любой объект из коллекц
 Для ввода значений null использовать пустую строку.<br/>
 Поля с комментарием "Значение этого поля должно генерироваться автоматически" не должны вводиться пользователем вручную при добавлении.<br/>
 Описание хранимых в коллекции классов:<br/>
-<br/>
-public class HumanBeing {<br/>
-<tr>private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически<br/>
-<tr>private String name; //Поле не может быть null, Строка не может быть пустой<br/>
-<tr>private Coordinates coordinates; //Поле не может быть null<br/>
-<tr>private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически<br/>
-<tr>private Boolean realHero; //Поле не может быть null<br/>
-<tr>private Boolean hasToothpick; //Поле не может быть null<br/>
-<tr>private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null<br/>
-<tr>private WeaponType weaponType; //Поле не может быть null<br/>
-<tr>private Mood mood; //Поле не может быть null<br/>
-<tr>private Car car; //Поле не может быть null<br/>
-}<br/>
-    
-public class Coordinates {<br/>
-<tr>private Long x; //Поле не может быть null<br/>
-<tr>private long y; //Значение поля должно быть больше -507<br/>
-}<br/>
-
-public class Car {<br/>
-<tr>private String name; //Поле не может быть null<br/>
-}<br/>
-
-public enum WeaponType {<br/>
-<tr>HAMMER,<br/></tr>
-<tr>AXE,<br/></tr>
-<tr>PISTOL,<br/></tr>
-<tr>MACHINE_GUN;<br/></tr>
-}<br/>
-
-public enum Mood {<br/>
-<tr>SORROW,<br/>
-<tr>LONGING,<br/>
-<tr>CALM,<br/>
-<tr>FRENZY;<br/>
-}<br/>
-
-Отчёт по работе должен содержать:<br/>
-<br/>
+```java
+public class HumanBeing {
+    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    private String name; //Поле не может быть null, Строка не может быть пустой
+    private Coordinates coordinates; //Поле не может быть null
+    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private Boolean realHero; //Поле не может быть null
+    private Boolean hasToothpick; //Поле не может быть null
+    private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null
+    private WeaponType weaponType; //Поле не может быть null
+    private Mood mood; //Поле не может быть null
+    private Car car; //Поле не может быть null
+}
+public class Coordinates {
+    private Long x; //Поле не может быть null
+    private long y; //Значение поля должно быть больше -507
+}
+public class Car {
+    private String name; //Поле не может быть null
+}
+public enum WeaponType {
+    HAMMER,
+    AXE,
+    PISTOL,
+    MACHINE_GUN;
+}
+public enum Mood {
+    SORROW,
+    LONGING,
+    CALM,
+    FRENZY;
+}
+```
 Текст задания.<br/>
 Диаграмма классов разработанной программы.<br/>
 Исходный код программы.<br/>
