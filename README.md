@@ -42,36 +42,41 @@ max_by_impact_speed : вывести любой объект из коллекц
 Описание хранимых в коллекции классов:<br/>
 <br/>
 public class HumanBeing {<br/>
-    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически<br/>
-    private String name; //Поле не может быть null, Строка не может быть пустой<br/>
-    private Coordinates coordinates; //Поле не может быть null<br/>
-    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически<br/>
-    private Boolean realHero; //Поле не может быть null<br/>
-    private Boolean hasToothpick; //Поле не может быть null<br/>
-    private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null<br/>
-    private WeaponType weaponType; //Поле не может быть null<br/>
-    private Mood mood; //Поле не может быть null<br/>
-    private Car car; //Поле не может быть null<br/>
+<tr>private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически<br/>
+<tr>private String name; //Поле не может быть null, Строка не может быть пустой<br/>
+<tr>private Coordinates coordinates; //Поле не может быть null<br/>
+<tr>private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически<br/>
+<tr>private Boolean realHero; //Поле не может быть null<br/>
+<tr>private Boolean hasToothpick; //Поле не может быть null<br/>
+<tr>private Double impactSpeed; //Значение поля должно быть больше -355, Поле может быть null<br/>
+<tr>private WeaponType weaponType; //Поле не может быть null<br/>
+<tr>private Mood mood; //Поле не может быть null<br/>
+<tr>private Car car; //Поле не может быть null<br/>
 }<br/>
+    
 public class Coordinates {<br/>
-    private Long x; //Поле не может быть null<br/>
-    private long y; //Значение поля должно быть больше -507<br/>
+<tr>private Long x; //Поле не может быть null<br/>
+<tr>private long y; //Значение поля должно быть больше -507<br/>
 }<br/>
+
 public class Car {<br/>
-    private String name; //Поле не может быть null<br/>
+<tr>private String name; //Поле не может быть null<br/>
 }<br/>
+
 public enum WeaponType {<br/>
-    HAMMER,<br/>
-    AXE,<br/>
-    PISTOL,<br/>
-    MACHINE_GUN;<br/>
+<tr>HAMMER,<br/>
+<tr>AXE,<br/>
+<tr>PISTOL,<br/>
+<tr>MACHINE_GUN;<br/>
 }<br/>
+
 public enum Mood {<br/>
-    SORROW,<br/>
-    LONGING,<br/>
-    CALM,<br/>
-    FRENZY;<br/>
+<tr>SORROW,<br/>
+<tr>LONGING,<br/>
+<tr>CALM,<br/>
+<tr>FRENZY;<br/>
 }<br/>
+
 Отчёт по работе должен содержать:<br/>
 <br/>
 Текст задания.<br/>
