@@ -13,7 +13,7 @@ public class Main {
         System.arraycopy(args, 0, values, 0, values.length);
 
         String file_name = FileNameFind.find(values);
-        System.setProperty(value, file_name); // устанавливаем переменную окружения.
+        System.setProperty(value, file_name); // Устанавливаем переменную окружения.
 
         if (FileValidator.check(file_name)) {
             ConsoleApp app = new ConsoleApp(file_name);
