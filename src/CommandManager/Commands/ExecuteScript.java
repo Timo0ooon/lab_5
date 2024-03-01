@@ -2,7 +2,7 @@ package CommandManager.Commands;
 
 import CommandManager.CommandManager;
 import DataProvider.Values;
-import Main.FileName;
+import Main.Main;
 import WorkingWithFiles.Reader.Extensions;
 import WorkingWithFiles.Reader.MyReader;
 
@@ -18,7 +18,7 @@ public class ExecuteScript {
      * @throws IOException исключение ввода-вывода.
      */
     public static void command(String file_name) throws IOException {
-        CommandManager commandManager = new CommandManager(FileName.get());
+        CommandManager commandManager = new CommandManager(System.getProperty(Main.value));
         MyReader reader = new MyReader();
         String[] commands = reader.read(Values.root_folder.get() + Values.separator.get() + "Files" + Values.separator.get() + file_name, Extensions.csv).split("\n");
 

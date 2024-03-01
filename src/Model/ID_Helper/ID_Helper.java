@@ -3,7 +3,7 @@ package Model.ID_Helper;
 import DataProvider.Reader.CSVReader;
 
 import Exceptions.DuplicateValue;
-import Main.FileName;
+import Main.Main;
 import Model.HumanBeing.HumanBeing;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class ID_Helper {
         CSVReader reader = new CSVReader();
 
         try {
-            for (HumanBeing human : reader.read(FileName.get()).values()) {
+            for (HumanBeing human : reader.read(System.getProperty(Main.value)).values()) {
                 id_list.add(human.getId());
             }
         }
