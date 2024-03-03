@@ -317,6 +317,45 @@ public class Main {
         // Метод remove(Object element) -> boolean, remove(int index) -> DataType - удаляет элемент. Смещение идет влево.
         list1.remove(0); // "Dimas" удален.
         list1.remove(8); // выбросится исключение, так как размер arraylist меньше.
+
+        // Метод addAll(ArrayList aL) -> boolean, addAll(int index, ArrayList aL) -> boolean.
+        ArrayList<String> list1 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.add("3");
+        list2.add("4");
+
+        list1.addAll(list2);  // Output: ["1", "2", "3", "4"]
+        list1.addAll(1, list2) // Output: ["1", "3", "4", "2"]
+
+        // Метод clear() -> void
+        list1.clear();  // Output: []
+
+        // Метод indexOf(Object element) -> int
+        System.out.println(list2.indexOf("3"));  // Output: 0
+
+        // lastIndexOf(Object element) -> int
+        list2.add("4");
+        System.out.println(list2.lastIndexOf("4"));  // Output: 2
+
+        // size() -> int
+        System.out.println(list2.size());  // Output: 3
+
+       // isEmpty() -> boolean
+       System.out.println(list2.isEmpty());  // Output: false
+       list2.clear();
+       System.out.println(list2.isEmpty());  // Output: true
+
+       // contains(Object element) -> boolean
+       System.out.println(list1.contains("11231312"));  // Output: false
+       list1.add("23")
+       System.out.println(list1.contains("23"));  // Output: true
+
+       // Метод toString() -> String
+       // Выведет строку, но можно не использовать, так как в System.out он применится автоматически. 
+
     }
 }
 ```
