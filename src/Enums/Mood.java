@@ -1,7 +1,7 @@
 package Enums;
 
 /**
- * Перечисление для поля mood в HumanBeing.
+ * Enumeration for the mood field in HumanBeing.
  */
 public enum Mood {
     SORROW,

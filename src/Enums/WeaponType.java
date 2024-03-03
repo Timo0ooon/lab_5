@@ -1,7 +1,7 @@
 package Enums;
 
 /**
- * Перечисление для поля weaponType.
+ * Enumeration for the weaponType field.
  */
 public enum WeaponType {
     HAMMER,

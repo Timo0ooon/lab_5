@@ -2,27 +2,20 @@ package Application;
 
 import Application.ConsoleAppInterface.ConsoleAppInterface;
 import CommandManager.CommandManager;
+import Main.Main;
 import MyScanner.MyScanner;
 
 /**
  * ConsoleApp class to run Application
  */
 public class ConsoleApp implements ConsoleAppInterface {
-    private final String file_name;
 
     /**
-     * @param FileName имя файла csv, где хранится коллекция. Файл должен храниться в папке Data.
-     */
-    public ConsoleApp(String FileName) {
-        this.file_name = FileName;
-    }
-
-    /**
-     * Запускает программу.
+     * Method starts a program.
      */
     @Override
     public void run() {
-        CommandManager commandManager = new CommandManager(this.file_name);
+        CommandManager commandManager = new CommandManager();
         System.out.println("Write command 'help' to see commands\n");
 
         while (true) {

@@ -1,14 +1,16 @@
 package CommandManager.StringParser;
 
 /**
- * Достает из строки пользователя команду и значение.
+ * StringParser class used in CommandManager class.
  */
 public class StringParser {
     public final String string = "";
 
     /**
-     * @param value строка пользователя.
-     * @return массив, в котором есть команда и аргумент.
+     * Method gets the command and value from the user string.
+     *
+     * @param value user string.
+     * @return array with command and argument.
      */
     public String[] find(String value) {
 

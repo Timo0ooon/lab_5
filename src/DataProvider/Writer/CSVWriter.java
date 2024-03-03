@@ -10,15 +10,16 @@ import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
 /**
- * Записывает в файл коллекцию.
+ * CSVWriter class
  */
 public class CSVWriter implements Writer {
     public final String file_extension = ".csv";
 
     /**
-     * Запись в файл.
-     * @param file_name имя файла.
-     * @param collection текущая коллекция.
+     * Method writes data to file.
+     *
+     * @param file_name  is name of file.
+     * @param collection current collection.
      */
     @Override
     public void write(String file_name, Hashtable<Integer, HumanBeing> collection) {
@@ -31,14 +32,11 @@ public class CSVWriter implements Writer {
 
             objectOut.close();
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("\nFile can not be written!\n");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("\nUnknown error!\n");
-        }
-        finally {
+        } finally {
             System.out.println("\nCollection saved!\n");
         }
     }

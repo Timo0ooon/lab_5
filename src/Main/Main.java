@@ -3,7 +3,7 @@ package Main;
 import Application.ConsoleApp;
 
 /**
- * Здесь запускается программа. В качестве переменной окружения нужно поставить имя файла, который дальше будет использоваться в программе
+ * This is where the program starts. You need to set the file name as an environment variable, which will then be used in the program
  */
 public class Main {
     public static final String value = "path";
@@ -13,14 +13,12 @@ public class Main {
         System.arraycopy(args, 0, values, 0, values.length);
 
         String file_name = FileNameFind.find(values);
-        System.setProperty(value, file_name); // Устанавливаем переменную окружения.
+        System.setProperty(value, file_name); // Set the environment variable.
 
         if (FileValidator.check(file_name)) {
-            ConsoleApp app = new ConsoleApp(file_name);
+            ConsoleApp app = new ConsoleApp();
             app.run();
-        }
-
-        else {
+        } else {
             System.out.println("\nFile not found!\n");
         }
     }

@@ -1,45 +1,39 @@
 package CommandManager;
 
+import CollectionManager.CollectionManager;
 import CommandManager.Commands.Help.Help;
 import CommandManager.Commands.*;
 import CommandManager.StringParser.StringParser;
-
-import DataProvider.Reader.CSVReader;
 
 import Exceptions.DuplicateValue;
 import Exceptions.EmptyValue;
 import Exceptions.UnknownValue;
 
+import Main.Main;
 import Model.HumanBeing.HumanBeing;
 
 import java.io.IOException;
 
-import java.util.Hashtable;
 
 /**
- * Ищет команду и исполняет ее, которую ввел пользователь в интерактивном режиме.
+ * Class CommandManager needed to work with user input.
  */
 public class CommandManager {
 
-    private Hashtable<Integer, HumanBeing> collection;
     private final String file_name;
+    private final CollectionManager collectionManager;
 
-    /**
-     * @param file_name файл в папке Data, которая используется для команд
-     */
-    public CommandManager(String file_name) {
-        this.file_name = file_name;
-
-        CSVReader reader = new CSVReader();
-
-        this.collection = reader.read(this.file_name);
-
-
-        if (this.collection == null)
-            this.collection = new Hashtable<Integer, HumanBeing>();
+    public CommandManager() {
+        this.collectionManager = new CollectionManager();
+        this.file_name = System.getProperty(Main.value);
 
     }
 
+    /**
+     * Method searches for and executes a command entered by the user interactively.
+     *
+     * @param user_value is user string.
+     */
     public void findCommand(String user_value) {
         StringParser parser = new StringParser();
         String[] CommandAndArgument = parser.find(user_value);
@@ -53,13 +47,9 @@ public class CommandManager {
 
                     try {
                         System.out.println(Help.command());
-                    }
-
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         System.out.println(e.getMessage());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown Error!\n");
                     }
                 }
@@ -67,27 +57,22 @@ public class CommandManager {
                 case ("info") -> {
 
                     try {
-                        System.out.println(Info.command(this.collection));
-                    }
-
-                    catch (EmptyValue e) {
+                        System.out.println(this.collectionManager.getInfo());
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown Error!\n");
                     }
                 }
 
                 case ("show") -> {
                     try {
-                        for (HumanBeing human : Show.command(this.collection)) {
-                            System.out.println("\n" + human + "\n");
+                        collectionManager.show();
+                        for (Integer key : this.collectionManager.get().keySet()) {
+                            System.out.println("\nKey: " + key + "\n" + this.collectionManager.get().get(key) + "\n");
                         }
 
-                    }
-
-                    catch (EmptyValue e) {
+                    } catch (EmptyValue e) {
                         System.out.println("\n" + e.get() + "\n");
                     }
                 }
@@ -99,23 +84,18 @@ public class CommandManager {
                         if (CommandAndArgument.length == 2) {
 
                             String argument = CommandAndArgument[1];
+
                             int key = Integer.parseInt(argument);
+                            this.collectionManager.insert(key);
 
-                            Insert.command(this.collection, key);
                             System.out.println("\nUser added!\n");
-                        }
-
-                        else {
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
 
-                    }
-
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("\nWrite a number!\n");
-                    }
-
-                    catch (DuplicateValue e) {
+                    } catch (DuplicateValue e) {
                         System.out.println(e.get());
                     }
 
@@ -129,18 +109,15 @@ public class CommandManager {
                             System.out.println();
 
                             String argument = CommandAndArgument[1];
+
                             int key = Integer.parseInt(argument);
+                            this.collectionManager.updateID(key);
 
-                            UpdateId.command(collection, key);
                             System.out.println("\nUser id updated!\n");
-                        }
-
-                        else {
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
-                    }
-
-                    catch (UnknownValue e) {
+                    } catch (UnknownValue e) {
                         System.out.println(e.get());
                     }
                 }
@@ -150,32 +127,23 @@ public class CommandManager {
                     try {
 
                         if (CommandAndArgument.length == 2) {
-                            System.out.println();
 
                             String argument = CommandAndArgument[1];
                             int key = Integer.parseInt(argument);
 
-                            System.out.println(RemoveKey.command(this.collection, key));
+                            System.out.println(this.collectionManager.removeKey(key));
                             System.out.println("\nKer removed!\n");
-                        }
-
-                        else {
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
 
-                    }
+                    } catch (NumberFormatException e) {
+                        System.out.println("\nUnknown value!\n");
 
-                    catch (NumberFormatException e) {
-                        System.out.println(e.getMessage());
-
-                    }
-
-                    catch (UnknownValue e) {
+                    } catch (UnknownValue e) {
                         System.out.println(e.get());
 
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown Error!\n");
 
                     }
@@ -185,21 +153,17 @@ public class CommandManager {
 
                     try {
                         System.out.println();
-                        Clear.command(this.collection);
+                        this.collectionManager.clear();
                         System.out.println("\nCollection cleared!\n");
-                    }
-
-                    catch (EmptyValue e) {
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown message!\n");
                     }
                 }
 
                 case ("save") -> {
-                    Save.command(this.collection, this.file_name);
+                    Save.command(this.collectionManager.get(), this.file_name);
                 }
 
                 case ("execute_script") -> {
@@ -209,17 +173,12 @@ public class CommandManager {
                             String argument = CommandAndArgument[1];
 
                             ExecuteScript.command(argument);
-                        }
-                        else {
+                        } else {
                             System.out.println("\nWrite argument!\n");
                         }
-                    }
-
-                    catch (IOException e) {
+                    } catch (IOException e) {
                         System.out.println("\nError with file!\n");
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -228,9 +187,7 @@ public class CommandManager {
 
                     try {
                         Exit.command();
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -243,24 +200,17 @@ public class CommandManager {
                             String argument = CommandAndArgument[1];
                             int key = Integer.parseInt(argument);
 
-                            for(HumanBeing human: RemoveGreater.command(this.collection, key)) {
-                                System.out.println(human);
+                            for (HumanBeing human : this.collectionManager.removeGreater(key)) {
+                                System.out.println("\n" + human + "\n");
                             }
-                        }
-
-                        else {
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
-                    }
-
-                    catch (EmptyValue e) {
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("\nArgument must be integer!\n");
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
 
@@ -275,23 +225,18 @@ public class CommandManager {
                             String argument = CommandAndArgument[1];
                             int key = Integer.parseInt(argument);
 
-                            RemoveLower.command(this.collection, key);
-                        }
+                            for (HumanBeing human : this.collectionManager.removeLower(key)) {
+                                System.out.println("\n" + human + "\n");
+                            }
 
-                        else {
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
-                    }
-
-                    catch (EmptyValue e) {
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("\nArgument must be integer!\n");
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -301,24 +246,19 @@ public class CommandManager {
                     try {
 
                         if (CommandAndArgument.length == 2) {
-                            String argument = CommandAndArgument[1];
-                            int key = Integer.parseInt(argument);
 
+                            String argument = CommandAndArgument[1];
+
+                            int key = Integer.parseInt(argument);
                             HumanBeing human = new HumanBeing();
 
-                            ReplaceIfLowe.command(collection, key, human);
-                        }
-
-                        else {
+                            this.collectionManager.replaceIfLowe(human, key);
+                        } else {
                             System.out.println("\nWrite Argument!\n");
                         }
-                    }
-
-                    catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("\nArgument must be integer!\n");
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -326,14 +266,10 @@ public class CommandManager {
                 case ("average_of_impact_speed") -> {
 
                     try {
-                        System.out.println("\n" + AverageOfImpactSpeed.command(collection) + "\n");
-                    }
-
-                    catch (EmptyValue e) {
+                        System.out.println("\n" + this.collectionManager.getAverageOfImpactSpeed() + "\n");
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -341,16 +277,12 @@ public class CommandManager {
                 case ("has_toothpick") -> {
 
                     try {
-                        for (HumanBeing human: HasToothpick.command(collection)) {
+                        for (HumanBeing human : this.collectionManager.hasToothPick()) {
                             System.out.println("\n" + human + "\n");
                         }
-                    }
-
-                    catch (EmptyValue e) {
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -358,14 +290,10 @@ public class CommandManager {
                 case ("max_by_impact_speed") -> {
 
                     try {
-                        System.out.println("\n" + MaxByImpactSpeed.command(collection) + "\n");
-                    }
-
-                    catch (EmptyValue e) {
+                        System.out.println("\n" + this.collectionManager.getMaxByImpactSpeed() + "\n");
+                    } catch (EmptyValue e) {
                         System.out.println(e.get());
-                    }
-
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         System.out.println("\nUnknown error!\n");
                     }
                 }
@@ -376,9 +304,7 @@ public class CommandManager {
             }
 
 
-        }
-
-        else {
+        } else {
             System.out.println("\nYou can write command 'help' to see other commands.\n");
         }
     }

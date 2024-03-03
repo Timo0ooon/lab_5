@@ -3,7 +3,7 @@ package MyScanner;
 import java.util.Scanner;
 
 /**
- * Для ввода строки пользователя.
+ * To enter a user string.
  */
 public class MyScanner {
     public static String input() {

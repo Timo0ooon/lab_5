@@ -6,13 +6,15 @@ import Model.HumanBeing.HumanBeing;
 import java.util.Hashtable;
 
 /**
- * Сохраняет коллекцию в файл.
+ * Save class used in CommandManager class.
  */
 public class Save {
 
     /**
-     * @param collection текущая коллекция
-     * @param file_name имя файла в папке Data, которое вводится как параметр переменной окружения.
+     * Method saves collection in file.
+     *
+     * @param collection is current collection.
+     * @param file_name  name of file, where collection will be saved.
      */
     public static void command(Hashtable<Integer, HumanBeing> collection, String file_name) {
         CSVWriter writer = new CSVWriter();

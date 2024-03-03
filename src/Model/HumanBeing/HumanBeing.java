@@ -31,18 +31,18 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
     private Car car;  // Field can not be null.
 
     public HumanBeing() {
-        this.set_name();
-        this.set_coordinates();
-        this.set_date();
-        this.set_realHero();
-        this.set_hasToothpick();
-        this.set_impactSpeed();
-        this.set_weaponType();
-        this.set_Mood();
-        this.set_car();
+        this.setName();
+        this.setCoordinates();
+        this.setDate();
+        this.setRealHero();
+        this.setHasToothpick();
+        this.setImpactSpeed();
+        this.setWeaponType();
+        this.setMood();
+        this.setCar();
     }
 
-    private void set_name() {
+    private void setName() {
         NameValidator validator = new NameValidator();
 
         while (true) {
@@ -58,15 +58,15 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_coordinates() {
+    private void setCoordinates() {
         this.coordinates = new Coordinates();
     }
 
-    private void set_date() {
+    private void setDate() {
         this.creationDate = LocalDate.now();
     }
 
-    private void set_realHero() {
+    private void setRealHero() {
         while (true) {
             System.out.println("Is this person real? Write true or false: ");
             String user_line = MyScanner.input();
@@ -84,7 +84,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_hasToothpick() {
+    private void setHasToothpick() {
         while (true) {
 
             System.out.println("Does this person have a toothpick? Write true or false: ");
@@ -104,7 +104,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_impactSpeed() {
+    private void setImpactSpeed() {
         ImpactSpeedValidator validator = new ImpactSpeedValidator();
         while (true) {
             try {
@@ -122,7 +122,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_weaponType() {
+    private void setWeaponType() {
         while (true) {
             StringBuilder sentence = new StringBuilder("Select the number from this list that you want to set:\n");
             WeaponType[] values = WeaponType.values();
@@ -149,7 +149,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_Mood() {
+    private void setMood() {
         while (true) {
             StringBuilder sentence = new StringBuilder("Select the number from this list that you want to set:\n");
             Mood[] values = Mood.values();
@@ -176,7 +176,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         }
     }
 
-    private void set_car() {
+    private void setCar() {
         this.car = new Car();
     }
 

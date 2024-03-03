@@ -3,7 +3,7 @@ package DataProvider;
 import java.io.File;
 
 /**
- * Здесь хранятся константы для работы с файлами.
+ * Constants for working with files are stored here.
  */
 public enum Values {
     root_folder("src"), separator(File.separator), folder("Data");
