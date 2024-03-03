@@ -263,8 +263,63 @@ public class Main {
 
 #### Динамический массив ArrayList 
 1. Реализация списка (list) на основе массива (array).
-2. ArrayList extends AbstractList implements List, RandomAccess.
-3. Быстрый произвольный доступ по индексу - O(1).
+2. В основе ArrayList лежит массив Object
+3. ArrayList extends AbstractList implements List, RandomAccess.
+4. Быстрый произвольный доступ по индексу - O(1).
+
+Примеры объявления ArrayList:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list1 = new ArrayList<String>();  // 1 способ объявления arraylist. DEFAULT_CAPACITY = 10(Вместимость), size = 0(Размер)
+        list1.add("Dmitry");
+        list1.add("Dimas");
+        list1.add("Dimoooooooonn");
+
+        ArrayList<DataType> list2 = new ArrayList<>();  // 2 способ объявление arraylist. DEFAULT_CAPACITY = 10(Вместимость), size = 0(Размер)
+        // Если size > capacity, то будет создан новый массив, который скопирует и переместит первые элементы до size, а еще потом выделит определенное количество мест(то есть массив увеличится)
+        ArrayList<DataType> list3 = new ArrayList<>(30);  // 3 способ, если заранее знаем, что длина будет равна 30. То есть внутри будет создан массив из 30 элементов(initialCapacity = 30), size = 0. 
+        List<DataType> list4 = new ArrayList<>();  // 4 способ. Так можно писать, так как ArrayList реализует List.
+
+        List list5 = new ArrayList(list1); // 5 способ. В list5 те же элементы, что и в list1, но они не ссылаются на один и тот же ArrayList(list1 != list5)
+
+        ArrayList list6 = new ArrayList(); // 6 способ НЕЛЬЗЯ использовать! Без указания дженериков можно добавить любой тип в list6, так как по умолчанию в нем могут быть любый элементы, которые наследуются от Object. 
+        list6.add("Dimas");
+        list6.add(123);
+        list6.add(new DataType());
+        list6.add(true);
+    }
+}
+
+class DataType {}
+```
+
+Методы ArrayList:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Метод add(DataType element) -> boolean, add(int index, DataType element) -> boolean - добавляет объект. 
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Dimas");
+        list.add("Dmitry");
+        list.add(1, "Dimoooooooonn");  // Вторым элементов в arraylist будет Dimoooooooonn.
+        list.add(1000, "Exception");  // Здесь выбросится исключение, так как размер arraylist равен 3.
+
+        // Метод get(int index) - возвращает объект типа String, у которого индекс равен аргументу.
+        System.out.println(list.get(0)); // Output: Dimas
+
+        // Метод set(int index, DataType element) -> DataType - меняет старый элемент в arraylist на новый.
+        list.set(1, "Dmitriy");  // Dimoooooooonn -> Dmitriy.
+        list.set(2, "Dimoooooooonn");  // Dmitriy -> Dimoooooooon.
+
+        // Метод remove(Object element) -> boolean, remove(int index) -> DataType - удаляет элемент. Смещение идет влево.
+        list1.remove(0); // "Dimas" удален.
+        list1.remove(8); // выбросится исключение, так как размер arraylist меньше.
+    }
+}
+```
 
 #### Двусвязный список LinkedList
 1. Реализация на основе двусвязного списка.
