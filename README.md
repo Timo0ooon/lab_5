@@ -298,6 +298,8 @@ class DataType {}
 Методы ArrayList:
 
 ```java
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         // Метод add(DataType element) -> boolean, add(int index, DataType element) -> boolean - добавляет объект. 
@@ -306,7 +308,7 @@ public class Main {
         list.add("Dmitry");
         list.add(1, "Dimoooooooonn");  // Вторым элементов в arraylist будет Dimoooooooonn.
         list.add(1000, "Exception");  // Здесь выбросится исключение, так как размер arraylist равен 3.
-
+        
         // Метод get(int index) - возвращает объект типа String, у которого индекс равен аргументу.
         System.out.println(list.get(0)); // Output: Dimas
 
@@ -343,18 +345,57 @@ public class Main {
         // size() -> int
         System.out.println(list2.size());  // Output: 3
 
-       // isEmpty() -> boolean
-       System.out.println(list2.isEmpty());  // Output: false
-       list2.clear();
-       System.out.println(list2.isEmpty());  // Output: true
+        // isEmpty() -> boolean
+        System.out.println(list2.isEmpty());  // Output: false
+        list2.clear();
+        System.out.println(list2.isEmpty());  // Output: true
 
-       // contains(Object element) -> boolean
-       System.out.println(list1.contains("11231312"));  // Output: false
-       list1.add("23")
-       System.out.println(list1.contains("23"));  // Output: true
+        // contains(Object element) -> boolean
+        System.out.println(list1.contains("11231312"));  // Output: false
+        list1.add("23")
+        System.out.println(list1.contains("23"));  // Output: true
 
-       // Метод toString() -> String
-       // Выведет строку, но можно не использовать, так как в System.out он применится автоматически. 
+        // Метод toString() -> String
+        // Выведет строку, но можно не использовать, так как в System.out он применится автоматически.
+
+        // Метод Arrays.asList(DataType[] a) -> List<DataType>;
+        String[] array = {"q", "w", "e", "r", "t", "y"};
+        List<String> list3 = Arrays.asList(array);
+
+        array[0] = "qwerty";
+        System.out.println(list3);  // Output: ["qwerty", "w", "e", "r", "t", "y"]
+
+        // Метод removeAll(Collection<?> c) -> boolean
+        ArrayList<String> list4 = new ArrayList<>();
+        list4.add("Dimas");
+        list4.add("Dimoooooooonn");
+        list4.add("Dmitriy");
+
+
+        ArrayList<String> list5 = new ArrayList<>();
+        list5.add("Dimas");
+        list5.add("Dimoooooooonn");
+
+        list4.removeAll(list5);
+        System.out.println(list4);  // Output: ["Dmitriy"]
+
+        // Метод retainAll(Collection<?> c) -> boolean
+        list4.add("Dimas");
+        list4.add("Dimoooooooonn");
+        
+        list4.retainAll(list5);
+        System.out.println(list4);  // Output: ["Dimas", "Dimoooooooonn"]
+
+        // Метод containsAll(Collection<?> c) -> boolean
+        System.out.println(list4.containsAll(list5));  // Output: true
+
+        // Метод subList(int fromIndex, int toIndex) -> List<E>
+        list4.add("Dmitriy");
+        System.out.println(list4.subList(0, 2));  // Output: ["Dimas", "Dimoooooooonn"]
+
+        // toArray() -> Object[] - переведет в массив.
+       
+       
 
     }
 }
