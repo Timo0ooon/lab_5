@@ -394,6 +394,17 @@ public class Main {
         System.out.println(list4.subList(0, 2));  // Output: ["Dimas", "Dimoooooooonn"]
 
         // toArray() -> Object[] - переведет в массив.
+
+        // toArray(T[] a) -> T[]
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7};
+        int[] array2 = array1.toArray(new String[0]);  // Вместо 0 можно использовать любое число. 
+        System.out.println(Arrays.toString(array2));  // Output: [1, 2, 3, 4, 5, 6, 7]
+
+        // List.of(E ...) -> List<E>
+        List<Integer> list6 = List.of(1, 2, 3, 4, 5);  // Неизменяемый List
+        list6.add(12);  // Выбросится исключение
+        
+        // List.copyOf(Collection) -> List<E>
        
        
 
