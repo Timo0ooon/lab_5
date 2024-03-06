@@ -1,5 +1,7 @@
 Application
 Application.ConsoleAppInterface
+CollectionManager
+CollectionManager.Interfaces
 CommandManager
 CommandManager.Commands
 CommandManager.Commands.Help
