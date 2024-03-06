@@ -263,8 +263,154 @@ public class Main {
 
 #### Динамический массив ArrayList 
 1. Реализация списка (list) на основе массива (array).
-2. ArrayList extends AbstractList implements List, RandomAccess.
-3. Быстрый произвольный доступ по индексу - O(1).
+2. В основе ArrayList лежит массив Object
+3. ArrayList extends AbstractList implements List, RandomAccess.
+4. Быстрый произвольный доступ по индексу - O(1).
+
+Примеры объявления ArrayList:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list1 = new ArrayList<String>();  // 1 способ объявления arraylist. DEFAULT_CAPACITY = 10(Вместимость), size = 0(Размер)
+        list1.add("Dmitry");
+        list1.add("Dimas");
+        list1.add("Dimoooooooonn");
+
+        ArrayList<DataType> list2 = new ArrayList<>();  // 2 способ объявление arraylist. DEFAULT_CAPACITY = 10(Вместимость), size = 0(Размер)
+        // Если size > capacity, то будет создан новый массив, который скопирует и переместит первые элементы до size, а еще потом выделит определенное количество мест(то есть массив увеличится)
+        ArrayList<DataType> list3 = new ArrayList<>(30);  // 3 способ, если заранее знаем, что длина будет равна 30. То есть внутри будет создан массив из 30 элементов(initialCapacity = 30), size = 0. 
+        List<DataType> list4 = new ArrayList<>();  // 4 способ. Так можно писать, так как ArrayList реализует List.
+
+        List list5 = new ArrayList(list1); // 5 способ. В list5 те же элементы, что и в list1, но они не ссылаются на один и тот же ArrayList(list1 != list5)
+
+        ArrayList list6 = new ArrayList(); // 6 способ НЕЛЬЗЯ использовать! Без указания дженериков можно добавить любой тип в list6, так как по умолчанию в нем могут быть любый элементы, которые наследуются от Object. 
+        list6.add("Dimas");
+        list6.add(123);
+        list6.add(new DataType());
+        list6.add(true);
+    }
+}
+
+class DataType {}
+```
+
+Методы ArrayList:
+
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        // Метод add(DataType element) -> boolean, add(int index, DataType element) -> boolean - добавляет объект. 
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Dimas");
+        list.add("Dmitry");
+        list.add(1, "Dimoooooooonn");  // Вторым элементов в arraylist будет Dimoooooooonn.
+        list.add(1000, "Exception");  // Здесь выбросится исключение, так как размер arraylist равен 3.
+        
+        // Метод get(int index) - возвращает объект типа String, у которого индекс равен аргументу.
+        System.out.println(list.get(0)); // Output: Dimas
+
+        // Метод set(int index, DataType element) -> DataType - меняет старый элемент в arraylist на новый.
+        list.set(1, "Dmitriy");  // Dimoooooooonn -> Dmitriy.
+        list.set(2, "Dimoooooooonn");  // Dmitriy -> Dimoooooooon.
+
+        // Метод remove(Object element) -> boolean, remove(int index) -> DataType - удаляет элемент. Смещение идет влево.
+        list1.remove(0); // "Dimas" удален.
+        list1.remove(8); // выбросится исключение, так как размер arraylist меньше.
+
+        // Метод addAll(ArrayList aL) -> boolean, addAll(int index, ArrayList aL) -> boolean.
+        ArrayList<String> list1 = new ArrayList<>();
+        list1.add("1");
+        list1.add("2");
+        
+        ArrayList<String> list2 = new ArrayList<>();
+        list2.add("3");
+        list2.add("4");
+
+        list1.addAll(list2);  // Output: ["1", "2", "3", "4"]
+        list1.addAll(1, list2) // Output: ["1", "3", "4", "2"]
+
+        // Метод clear() -> void
+        list1.clear();  // Output: []
+
+        // Метод indexOf(Object element) -> int
+        System.out.println(list2.indexOf("3"));  // Output: 0
+
+        // lastIndexOf(Object element) -> int
+        list2.add("4");
+        System.out.println(list2.lastIndexOf("4"));  // Output: 2
+
+        // size() -> int
+        System.out.println(list2.size());  // Output: 3
+
+        // isEmpty() -> boolean
+        System.out.println(list2.isEmpty());  // Output: false
+        list2.clear();
+        System.out.println(list2.isEmpty());  // Output: true
+
+        // contains(Object element) -> boolean
+        System.out.println(list1.contains("11231312"));  // Output: false
+        list1.add("23")
+        System.out.println(list1.contains("23"));  // Output: true
+
+        // Метод toString() -> String
+        // Выведет строку, но можно не использовать, так как в System.out он применится автоматически.
+
+        // Метод Arrays.asList(DataType[] a) -> List<DataType>;
+        String[] array = {"q", "w", "e", "r", "t", "y"};
+        List<String> list3 = Arrays.asList(array);
+
+        array[0] = "qwerty";
+        System.out.println(list3);  // Output: ["qwerty", "w", "e", "r", "t", "y"]
+
+        // Метод removeAll(Collection<?> c) -> boolean
+        ArrayList<String> list4 = new ArrayList<>();
+        list4.add("Dimas");
+        list4.add("Dimoooooooonn");
+        list4.add("Dmitriy");
+
+
+        ArrayList<String> list5 = new ArrayList<>();
+        list5.add("Dimas");
+        list5.add("Dimoooooooonn");
+
+        list4.removeAll(list5);
+        System.out.println(list4);  // Output: ["Dmitriy"]
+
+        // Метод retainAll(Collection<?> c) -> boolean
+        list4.add("Dimas");
+        list4.add("Dimoooooooonn");
+        
+        list4.retainAll(list5);
+        System.out.println(list4);  // Output: ["Dimas", "Dimoooooooonn"]
+
+        // Метод containsAll(Collection<?> c) -> boolean
+        System.out.println(list4.containsAll(list5));  // Output: true
+
+        // Метод subList(int fromIndex, int toIndex) -> List<E>
+        list4.add("Dmitriy");
+        System.out.println(list4.subList(0, 2));  // Output: ["Dimas", "Dimoooooooonn"]
+
+        // toArray() -> Object[] - переведет в массив.
+
+        // toArray(T[] a) -> T[]
+        int[] array1 = {1, 2, 3, 4, 5, 6, 7};
+        int[] array2 = array1.toArray(new String[0]);  // Вместо 0 можно использовать любое число. 
+        System.out.println(Arrays.toString(array2));  // Output: [1, 2, 3, 4, 5, 6, 7]
+
+        // List.of(E ...) -> List<E>
+        List<Integer> list6 = List.of(1, 2, 3, 4, 5);  // Неизменяемый List
+        list6.add(12);  // Выбросится исключение
+        
+        // List.copyOf(Collection) -> List<E>
+       
+       
+
+    }
+}
+```
 
 #### Двусвязный список LinkedList
 1. Реализация на основе двусвязного списка.
