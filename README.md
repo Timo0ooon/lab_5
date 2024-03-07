@@ -443,6 +443,8 @@ public class Main {
 * Методы: V put(K key, V value), V get(K key), V remove(K key)...
 
 #### Хеш-таблица HashMap
+* [Работа HashMap](https://www.youtube.com/watch?v=0UX4MIfOMEs&t=235s&ab_channel=%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%B0%D0%B9%D0%A2%D1%83%D0%B7%D0%BE%D0%B2%E2%80%94Golang)
+* [Еще про HashMap](https://www.youtube.com/watch?v=kVeib6glUoc&ab_channel=%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%B0%D0%BD%D0%B8%D1%8F)
 * Ассоциативный массив на основе хеш-таблицы
 * bucket = key.hashcode() % N
 * Нужен метод hashCode() у элементов
