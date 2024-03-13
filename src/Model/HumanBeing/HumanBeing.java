@@ -1,12 +1,13 @@
 package Model.HumanBeing;
 
 import Exceptions.DuplicateValue;
+
 import Model.Car.Car;
-import Model.Car.Validator.NameValidator;
 import Model.Coordinates.Coordinates;
 import Model.HumanBeing.Validators.ImpactSpeedValidator;
 
 import Model.ID_Helper.ID_Helper;
+import Model.ValidatorInterface.StringValidator;
 import MyScanner.MyScanner;
 
 import Enums.Mood;
@@ -31,7 +32,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
     private Car car;  // Field can not be null.
 
     public HumanBeing() {
-        this.setName();
+        this.setName((String name) -> !name.replaceAll(" ", "").isEmpty());
         this.setCoordinates();
         this.setDate();
         this.setRealHero();
@@ -42,8 +43,7 @@ public class HumanBeing implements Comparable<HumanBeing>, Serializable {
         this.setCar();
     }
 
-    private void setName() {
-        NameValidator validator = new NameValidator();
+    private void setName(StringValidator validator) {
 
         while (true) {
 

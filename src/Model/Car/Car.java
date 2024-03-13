@@ -1,20 +1,18 @@
 package Model.Car;
 
-import Model.Car.Validator.NameValidator;
+import Model.ValidatorInterface.StringValidator;
 import MyScanner.MyScanner;
 
-import javax.xml.validation.Validator;
 import java.io.Serializable;
 
 public class Car implements Serializable {
     private String name;  // Field cannot be null
 
     public Car() {
-        this.set_car_name();
+        this.set_car_name((String name) -> !name.replaceAll(" ", "").isEmpty());
     }
 
-    private void set_car_name() {
-        NameValidator validator = new NameValidator();
+    private void set_car_name(StringValidator validator) {
 
         while (true) {
             System.out.println("Write car name: ");
