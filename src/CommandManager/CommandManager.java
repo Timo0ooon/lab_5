@@ -176,10 +176,9 @@ public class CommandManager {
                         } else {
                             System.out.println("\nWrite argument!\n");
                         }
-                    } catch (IOException e) {
-                        System.out.println("\nError with file!\n");
+
                     } catch (Exception e) {
-                        System.out.println("\nUnknown error!\n");
+                        System.out.print("\nUnknown error!\n");
                     }
                 }
 

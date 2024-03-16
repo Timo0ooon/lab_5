@@ -19,8 +19,9 @@ public class ConsoleApp implements ConsoleAppInterface {
         System.out.println("Write command 'help' to see commands\n");
 
         while (true) {
-            System.out.print("Write a command: ");
+            System.out.print("\nWrite a command: ");
             String user_string = MyScanner.input();
+            System.out.println();
 
             commandManager.findCommand(user_string);
         }

@@ -23,14 +23,11 @@ public class CSVReader implements Reader {
      */
     @Override
     public Hashtable<Integer, HumanBeing> read(String file_name) {
-        try {
-            String path = "" + Values.root_folder + Values.separator + Values.folder + Values.separator + file_name + file_extension;
+        String path = "" + Values.root_folder + Values.separator + Values.folder + Values.separator + file_name + file_extension;
 
-            FileInputStream file = new FileInputStream(path);
-            ObjectInputStream objectIn =  new ObjectInputStream(file);
+        try (ObjectInputStream objectIn =  new ObjectInputStream(new FileInputStream(path))) {
+
             Hashtable<Integer, HumanBeing> collection = (Hashtable<Integer, HumanBeing>) objectIn.readObject();
-
-            objectIn.close();
 
             return collection;
 
@@ -43,7 +40,6 @@ public class CSVReader implements Reader {
         }
         catch (Exception e) {
             System.out.println("\nUnknown error!\n");
-
         }
         return null;
     }

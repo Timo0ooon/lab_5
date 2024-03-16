@@ -14,11 +14,9 @@ public enum Values {
         this.value = value;
     }
 
-
     public String get() {
         return this.value;
     }
-
 
     @Override
     public String toString() {

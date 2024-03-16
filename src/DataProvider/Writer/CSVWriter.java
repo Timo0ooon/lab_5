@@ -23,20 +23,22 @@ public class CSVWriter implements Writer {
      */
     @Override
     public void write(String file_name, Hashtable<Integer, HumanBeing> collection) {
-        try {
-            String path = "" + Values.root_folder + Values.separator + Values.folder + Values.separator + file_name + this.file_extension;
-            FileOutputStream file = new FileOutputStream(path);
+        String path = "" + Values.root_folder + Values.separator + Values.folder + Values.separator + file_name + this.file_extension;
 
-            ObjectOutputStream objectOut = new ObjectOutputStream(file);
+        try (ObjectOutputStream objectOut = new ObjectOutputStream(new FileOutputStream(path))) {
             objectOut.writeObject(collection);
 
-            objectOut.close();
+        }
 
-        } catch (IOException e) {
+        catch (IOException e) {
             System.out.println("\nFile can not be written!\n");
-        } catch (Exception e) {
+        }
+
+        catch (Exception e) {
             System.out.println("\nUnknown error!\n");
-        } finally {
+        }
+
+        finally {
             System.out.println("\nCollection saved!\n");
         }
     }
